@@ -1,1557 +1,374 @@
 <?php
 include 'header.php';
 
+// 1. =================================================================
+//    RECIPE DATA ARRAY
+//    All 20 recipes are now in this structured array.
+// ===================================================================
+$recipes = [
+    [
+        'id' => 1,
+        'name' => 'Masala Oats',
+        'image' => 'rec/Rec1.jpg',
+        'benefit' => 'Weight-loss',
+        'category' => 'Veg',
+        'nutrients' => ['Calories' => 153, 'Protein' => 11.3, 'Carbohydrates' => 27, 'Fat' => 20, 'Fiber' => 3, 'Sugar' => 6.3, 'Sodium' => 270],
+        'ingredients' => ['1 cup rolled oats', '1 small onion, chopped', '1 small tomato, chopped', '1/2 cup mixed vegetables (peas, carrots, beans)', '1 green chili, slit', '1/2 tsp turmeric powder', '1/2 tsp cumin seeds', 'Salt to taste', '2 cups water', '1 tbsp oil', 'Fresh coriander for garnish'],
+        'instructions' => ['Heat oil in a pan, add cumin seeds.', 'Add chopped onion and green chili, sauté until translucent.', 'Add tomato and cook until soft.', 'Add mixed vegetables, turmeric powder, and salt. Cook for 2-3 minutes.', 'Add oats and roast for a minute.', 'Pour in water, bring to a boil, then simmer until oats are cooked and the mixture thickens.', 'Garnish with fresh coriander and serve hot.']
+    ],
+    [
+        'id' => 2,
+        'name' => 'Chickpea Salad',
+        'image' => 'rec/Rec2.jpg',
+        'benefit' => 'Weight-loss',
+        'category' => 'Veg',
+        'nutrients' => ['Calories' => 167, 'Protein' => 8.1, 'Fat' => 15, 'Carbohydrates' => 28.5, 'Fiber' => 13.4, 'Sugar' => 7.87, 'Calcium' => 80.36],
+        'ingredients' => ['1 can chickpeas, rinsed and drained', '1 cucumber, diced', '1 red bell pepper, diced', '1/4 red onion, finely chopped', '1/4 cup fresh parsley, chopped', '2 tbsp olive oil', '1 tbsp lemon juice', 'Salt and pepper to taste'],
+        'instructions' => ['In a large bowl, combine chickpeas, cucumber, red bell pepper, red onion, and parsley.', 'In a small bowl, whisk together olive oil, lemon juice, salt, and pepper.', 'Pour the dressing over the salad and toss to combine.', 'Let it sit for at least 10 minutes for the flavors to meld before serving.']
+    ],
+    [
+        'id' => 3,
+        'name' => 'Goddess Bowls',
+        'image' => 'rec/Rec19.jpg',
+        'benefit' => 'Weight-gain',
+        'category' => 'Veg',
+        'nutrients' => ['Calories' => 300, 'Protein' => 25, 'Fat' => 15, 'Carbohydrates' => 10, 'Fiber' => 3, 'Sugar' => 2, 'Sodium' => 500],
+        'ingredients' => ['2 cups quinoa, cooked', '1 cup chickpeas, cooked', '1 cup cherry tomatoes, halved', '1 cucumber, diced', '1 avocado, sliced', '1/2 cup red onion, finely chopped', '1/4 cup Kalamata olives, sliced', '1/4 cup feta cheese, crumbled', '1/4 cup fresh parsley, chopped', '1/4 cup tahini dressing', 'Salt and pepper to taste'],
+        'instructions' => ['Cook quinoa according to package instructions.', 'In a large bowl, combine cooked quinoa, chickpeas, cherry tomatoes, cucumber, avocado, red onion, olives, and feta cheese.', 'Drizzle the tahini dressing over the bowl.', 'Gently toss the ingredients to combine.', 'Season with salt and pepper to taste.', 'Sprinkle fresh parsley on top.', 'Serve and enjoy your delicious Goddess Bowl!']
+    ],
+    [
+        'id' => 4,
+        'name' => 'Sprouts Salad',
+        'image' => 'rec/Rec4.jpg',
+        'benefit' => 'Weight-loss',
+        'category' => 'Veg',
+        'nutrients' => ['Calories' => 154, 'Protein' => 9.2, 'Fat' => 0.9, 'Carbohydrates' => 30, 'Fiber' => 11, 'Sugar' => 6.1, 'Sodium' => 446],
+        'ingredients' => ['2 cups mixed sprouts', '1 small onion, finely chopped', '1 small tomato, finely chopped', '1/2 cucumber, chopped', '1 green chili, finely chopped', '1/4 cup chopped coriander', '1 tbsp lemon juice', '1/2 tsp chaat masala', 'Salt to taste'],
+        'instructions' => ['In a large bowl, combine the mixed sprouts, onion, tomato, cucumber, green chili, and coriander.', 'Sprinkle chaat masala and salt over the mixture.', 'Drizzle with lemon juice.', 'Toss everything well to combine.', 'Serve immediately for the best crunch and freshness.']
+    ],
+    [
+        'id' => 5,
+        'name' => 'Chicken Tikka Kebab',
+        'image' => 'rec/Rec5.jpg',
+        'benefit' => 'Weight-loss',
+        'category' => 'Non-Veg',
+        'nutrients' => ['Calories' => 300, 'Protein' => 33, 'Fat' => 12, 'Carbohydrates' => 11, 'Cholestrol' => 82, 'Sugar' => 5.5, 'Sodium' => 268],
+        'ingredients' => ['1 lb boneless, skinless chicken breast, cut into 1-inch cubes', '1 cup plain yogurt', '1 tbsp ginger-garlic paste', '1 tsp turmeric powder', '1 tsp garam masala', '1 tsp red chili powder', '1 tbsp lemon juice', 'Salt to taste', 'Bell peppers and onions, cut into chunks', 'Skewers'],
+        'instructions' => ['In a bowl, mix yogurt, ginger-garlic paste, turmeric, garam masala, chili powder, lemon juice, and salt.', 'Add the chicken cubes and marinate for at least 1 hour.', 'Thread the chicken, bell peppers, and onions onto skewers.', 'Grill or bake at 400°F (200°C) for 15-20 minutes, or until chicken is cooked through.', 'Serve hot with mint chutney.']
+    ],
+    [
+        'id' => 6,
+        'name' => 'Chicken Curry',
+        'image' => 'rec/Rec6.jpg',
+        'benefit' => 'Weight-loss',
+        'category' => 'Non-Veg',
+        'nutrients' => ['Calories' => 243, 'Protein' => 25, 'Fat' => 11, 'Carbohydrates' => 7.5, 'Fiber' => 1.5, 'Sugar' => 2, 'Sodium' => 73, 'Cholestrol' => 74],
+        'ingredients' => ['1 lb boneless chicken, cut into pieces', '2 medium onions, finely chopped', '2 tomatoes, pureed', '1 tbsp ginger-garlic paste', '1/2 cup yogurt', '1 tsp turmeric powder', '1 tsp red chili powder', '1 tsp coriander powder', '1/2 tsp garam masala', '2 tbsp oil', 'Salt to taste'],
+        'instructions' => ['Heat oil in a pan, add chopped onions and sauté until golden brown.', 'Add ginger-garlic paste and cook for a minute.', 'Add tomato puree, turmeric, chili powder, and coriander powder. Cook until oil separates.', 'Add the chicken pieces and sear on all sides.', 'Whisk yogurt and add it to the pan. Stir well.', 'Add 1 cup of water, salt, and garam masala. Cover and cook for 15-20 minutes until chicken is tender.', 'Garnish with coriander and serve.']
+    ],
+    [
+        'id' => 7,
+        'name' => 'Daal Makhni',
+        'image' => 'rec/Rec7.jpg',
+        'benefit' => 'Muscle-gain',
+        'category' => 'Veg',
+        'nutrients' => ['Calories' => 300, 'Protein' => 25, 'Fat' => 15, 'Carbohydrates' => 10, 'Fiber' => 3, 'Sugar' => 2, 'Sodium' => 500],
+        'ingredients' => ['1 cup whole black lentils (urad dal)', '1/4 cup kidney beans (rajma)', '1 large onion, finely chopped', '2 tomatoes, pureed', '1 tbsp ginger-garlic paste', '1 tsp red chili powder', '1/4 cup cream', '2 tbsp butter', 'Salt to taste'],
+        'instructions' => ['Soak lentils and kidney beans overnight. Pressure cook until soft.', 'Heat butter in a pan, sauté onions until golden.', 'Add ginger-garlic paste and tomato puree. Cook until oil separates.', 'Add red chili powder and salt.', 'Add the cooked lentils and beans. Simmer for 20-30 minutes.', 'Stir in cream and let it cook for another 2 minutes.', 'Serve hot with naan or rice.']
+    ],
+    [
+        'id' => 8,
+        'name' => 'Rajma Chawal',
+        'image' => 'rec/Rec8.jpg',
+        'benefit' => 'Muscle-gain',
+        'category' => 'Veg',
+        'nutrients' => ['Calories' => 300, 'Protein' => 25, 'Fat' => 15, 'Carbohydrates' => 10, 'Fiber' => 3, 'Sugar' => 2, 'Sodium' => 500],
+        'ingredients' => ['1 cup kidney beans (rajma), soaked overnight', '2 onions, chopped', '2 tomatoes, pureed', '1 tbsp ginger-garlic paste', '1 tsp cumin powder', '1 tsp coriander powder', '1/2 tsp turmeric powder', '1/2 tsp garam masala', '2 tbsp oil', 'Salt to taste', 'Cooked rice for serving'],
+        'instructions' => ['Pressure cook the soaked kidney beans until tender.', 'Heat oil in a pan, sauté onions until golden brown.', 'Add ginger-garlic paste and cook.', 'Add tomato puree and all the powdered spices except garam masala. Cook until the masala thickens.', 'Add the boiled kidney beans along with their water. Add salt.', 'Simmer for 15-20 minutes. Add garam masala.', 'Serve hot with steamed rice (chawal).']
+    ],
+    [
+        'id' => 9,
+        'name' => 'Paneer Tikka',
+        'image' => 'rec/Rec9.jpg',
+        'benefit' => 'Muscle-gain',
+        'category' => 'Veg', // Corrected from Non-Veg
+        'nutrients' => ['Calories' => 300, 'Protein' => 25, 'Fat' => 15, 'Carbohydrates' => 10, 'Fiber' => 3, 'Sugar' => 2, 'Sodium' => 500],
+        'ingredients' => ['250g paneer, cubed', '1 cup thick yogurt', '1 tbsp ginger-garlic paste', '1 tsp carom seeds (ajwain)', '1 tsp chaat masala', '1/2 tsp turmeric powder', '1 tsp red chili powder', '1 tbsp gram flour (besan), roasted', 'Bell peppers and onions, cubed'],
+        'instructions' => ['In a bowl, mix yogurt with all spices, ginger-garlic paste, and roasted gram flour.', 'Add paneer, bell peppers, and onions. Coat well and marinate for at least 30 minutes.', 'Arrange on skewers.', 'Grill or bake in a preheated oven at 400°F (200°C) for 15 minutes, turning once.', 'Serve hot with lemon wedges.']
+    ],
+    [
+        'id' => 10,
+        'name' => 'Grilled Chicken Breast',
+        'image' => 'rec/Rec10.jpg',
+        'benefit' => 'Muscle-gain',
+        'category' => 'Non-Veg',
+        'nutrients' => ['Calories' => 300, 'Protein' => 25, 'Fat' => 15, 'Carbohydrates' => 10, 'Fiber' => 3, 'Sugar' => 2, 'Sodium' => 500],
+        'ingredients' => ['2 boneless, skinless chicken breasts', '2 tbsp olive oil', '2 cloves garlic, minced', '1 tsp dried oregano', '1 tsp paprika', 'Juice of 1 lemon', 'Salt and black pepper to taste'],
+        'instructions' => ['In a bowl, whisk together olive oil, minced garlic, oregano, paprika, lemon juice, salt, and pepper.', 'Place chicken breasts in the marinade and coat them well. Let it marinate for at least 15 minutes.', 'Preheat a grill or grill pan to medium-high heat.', 'Grill the chicken for 6-8 minutes per side, or until cooked through and grill marks appear.', 'Let the chicken rest for a few minutes before slicing.']
+    ],
+    [
+        'id' => 11,
+        'name' => 'Spicy Baked Fish',
+        'image' => 'rec/Rec11.jpg',
+        'benefit' => 'Muscle-gain',
+        'category' => 'Non-Veg',
+        'nutrients' => ['Calories' => 300, 'Protein' => 25, 'Fat' => 15, 'Carbohydrates' => 10, 'Fiber' => 3, 'Sugar' => 2, 'Sodium' => 500],
+        'ingredients' => ['1 pound salmon or any white fish, fresh or frozen.', '1/4 teaspoon paprika.', '1/4 teaspoon onion powder.', '1/4 teaspoon garlic powder.', '1/8 teaspoon black pepper.', '1/8 teaspoon dried oregano.', '1/8 teaspoon dried thyme.', '1 tablespoon lemon juice.', '1 1/2 tablespoons soft melted margarine.'],
+        'instructions' => ['If using frozen fish, thaw in refrigerator according to package directions.', 'Preheat oven to 350 degrees F.', 'Separate (or cut) fish into 4 pieces. Place fish in a 9x13x2 inch baking pan.', 'Combine paprika, garlic and onion powder, pepper, oregano, and thyme in a small bowl.', 'Sprinkle herb mixture and lemon juice evenly over the fish. Then drizzle melted margarine on top.', 'Bake until fish flakes easily with a fork, about 20 to 25 minutes.']
+    ],
+    [
+        'id' => 12,
+        'name' => 'Egg Parathas',
+        'image' => 'rec/Rec12.jpg',
+        'benefit' => 'Muscle-gain',
+        'category' => 'Non-Veg',
+        'nutrients' => ['Calories' => 300, 'Protein' => 25, 'Fat' => 15, 'Carbohydrates' => 10, 'Fiber' => 3, 'Sugar' => 2, 'Sodium' => 500],
+        'ingredients' => ['2 cups whole wheat flour', '4 eggs', '1 small onion, finely chopped', '1 green chili, finely chopped', '1/4 cup chopped coriander', 'Salt to taste', 'Water to knead', 'Oil or ghee for cooking'],
+        'instructions' => ['Knead a soft dough with whole wheat flour, salt, and water. Let it rest for 15 minutes.', 'In a bowl, whisk eggs with onion, chili, coriander, and salt.', 'Take a small portion of the dough and roll it into a thin circle (roti).', 'Cook one side on a hot tawa (griddle). Flip it.', 'Spread some oil on the half-cooked side. Pour a portion of the egg mixture on top.', 'Flip and cook until the egg is set and the paratha is golden brown on both sides.', 'Serve hot.']
+    ],
+    [
+        'id' => 13,
+        'name' => 'Air Fryer Eggplant Parm',
+        'image' => 'rec/Rec13.jpg',
+        'benefit' => 'Weight-gain',
+        'category' => 'Veg',
+        'nutrients' => ['Calories' => 300, 'Protein' => 25, 'Fat' => 15, 'Carbohydrates' => 10, 'Fiber' => 3, 'Sugar' => 2, 'Sodium' => 500],
+        'ingredients' => ['1 large eggplant, sliced into 1/2-inch rounds', '1 cup breadcrumbs', '1/2 cup grated Parmesan cheese', '1 teaspoon dried oregano', '1 teaspoon garlic powder', '1/2 teaspoon salt', '1/4 teaspoon black pepper', '2 large eggs, beaten', '1 cup marinara sauce', '1 cup shredded mozzarella cheese', 'Fresh basil leaves for garnish', 'Olive oil spray'],
+        'instructions' => ['Preheat the air fryer to 375°F (190°C).', 'In a bowl, combine breadcrumbs, Parmesan cheese, oregano, garlic powder, salt, and black pepper.', 'Dip each eggplant slice into the beaten eggs and then coat with the breadcrumb mixture.', 'Place the coated eggplant slices in a single layer in the air fryer basket.', 'Lightly spray the eggplant slices with olive oil.', 'Air fry for 10-12 minutes, flipping halfway through, until golden and crispy.', 'Spread a thin layer of marinara sauce in the bottom of the air fryer basket.', 'Arrange the air-fried eggplant slices on top of the sauce.', 'Spoon more marinara sauce over each eggplant slice and sprinkle with mozzarella cheese.', 'Return to the air fryer and cook for 5-7 minutes, until cheese is melted.', 'Garnish with fresh basil before serving.']
+    ],
+    [
+        'id' => 14,
+        'name' => 'Cauliflower Fried Rice',
+        'image' => 'rec/Rec14.jpg',
+        'benefit' => 'Weight-gain',
+        'category' => 'Veg',
+        'nutrients' => ['Calories' => 300, 'Protein' => 25, 'Fat' => 15, 'Carbohydrates' => 10, 'Fiber' => 3, 'Sugar' => 2, 'Sodium' => 500],
+        'ingredients' => ['1 medium-sized cauliflower, grated', '2 tablespoons vegetable oil', '1 onion, finely chopped', '2 cloves garlic, minced', '1 carrot, diced', '1/2 cup peas', '2 eggs, beaten', '3 tablespoons soy sauce', '1 teaspoon sesame oil', 'Salt and pepper to taste', 'Green onions, chopped (for garnish)'],
+        'instructions' => ['Heat vegetable oil in a large skillet or wok over medium-high heat.', 'Add chopped onions and minced garlic, sauté until fragrant.', 'Add diced carrots and peas, stir-fry until vegetables are tender.', 'Push the vegetables to one side, pour beaten eggs into the other side and scramble.', 'Combine the scrambled eggs with the vegetables.', 'Add grated cauliflower to the skillet, stirring continuously.', 'Pour soy sauce and sesame oil over the cauliflower mixture. Mix well.', 'Cook for 5-7 minutes or until the cauliflower is tender.', 'Season with salt and pepper to taste.', 'Garnish with chopped green onions and serve hot.']
+    ],
+    [
+        'id' => 15,
+        'name' => 'Air Fryer Fish Tacos',
+        'image' => 'rec/Rec15.jpg',
+        'benefit' => 'Weight-gain',
+        'category' => 'Non-Veg',
+        'nutrients' => ['Calories' => 300, 'Protein' => 25, 'Fat' => 15, 'Carbohydrates' => 10, 'Fiber' => 3, 'Sugar' => 2, 'Sodium' => 500],
+        'ingredients' => ['1 pound white fish fillets (cod or tilapia)', '1 tsp chili powder', '1/2 tsp cumin', '1/2 tsp paprika', 'Salt and pepper to taste', '1 tbsp olive oil', '8 small flour tortillas', 'For Avocado Salsa: 1 avocado diced, 1/2 red onion diced, 1/4 cup cilantro chopped, juice of 1 lime'],
+        'instructions' => ['Preheat the air fryer to 400°F (200°C).', 'In a small bowl, mix chili powder, cumin, paprika, salt, and pepper.', 'Rub the fish fillets with olive oil and then with the spice mixture.', 'Place the fish in the air fryer basket in a single layer.', 'Air fry for 10-12 minutes or until the fish is cooked through and flakes easily.', 'While fish is cooking, prepare the avocado salsa by combining all its ingredients.', 'Warm the tortillas.', 'Assemble the tacos by placing fish on each tortilla and topping with avocado salsa.']
+    ],
+    [
+        'id' => 16,
+        'name' => 'Coconut Chickpea & Sweet Potato Curry',
+        'image' => 'rec/Rec16.jpg',
+        'benefit' => 'Weight-gain',
+        'category' => 'Veg',
+        'nutrients' => ['Calories' => 300, 'Protein' => 25, 'Fat' => 15, 'Carbohydrates' => 10, 'Fiber' => 3, 'Sugar' => 2, 'Sodium' => 500],
+        'ingredients' => ['1 can (15 oz) chickpeas, drained and rinsed', '2 medium sweet potatoes, peeled and diced', '1 onion, finely chopped', '2 cloves garlic, minced', '1 can (14 oz) coconut milk', '1 can (14 oz) diced tomatoes', '1 cup vegetable broth', '2 tablespoons curry powder', '1 tablespoon vegetable oil', 'Salt and pepper to taste', 'Fresh cilantro for garnish'],
+        'instructions' => ['Heat vegetable oil in a large pot over medium heat.', 'Add chopped onions and minced garlic. Sauté until translucent.', 'Add curry powder and stir for one minute.', 'Add diced sweet potatoes, chickpeas, coconut milk, diced tomatoes, and vegetable broth.', 'Season with salt and pepper. Bring the curry to a simmer.', 'Cover the pot and let it simmer for 20-25 minutes or until sweet potatoes are tender.', 'Garnish with fresh cilantro before serving.']
+    ],
+    [
+        'id' => 17,
+        'name' => 'Taco Salad',
+        'image' => 'rec/Rec17.jpg',
+        'benefit' => 'Weight-gain',
+        'category' => 'Veg',
+        'nutrients' => ['Calories' => 300, 'Protein' => 25, 'Fat' => 15, 'Carbohydrates' => 10, 'Fiber' => 3, 'Sugar' => 2, 'Sodium' => 500],
+        'ingredients' => ['1 lb ground beef', '1 packet taco seasoning', '1 can (15 oz) black beans, drained and rinsed', '1 cup cherry tomatoes, halved', '1 cup shredded lettuce', '1 cup shredded cheddar cheese', '1/2 cup diced red onion', '1 avocado, diced', '1/2 cup sour cream', '1/4 cup salsa', 'Tortilla chips for serving'],
+        'instructions' => ['In a skillet, brown the ground beef. Drain excess fat.', 'Add the taco seasoning according to the packet instructions.', 'In a large bowl, combine the cooked beef, black beans, cherry tomatoes, lettuce, cheddar cheese, and red onion.', 'Toss the salad ingredients together until well mixed.', 'In a small bowl, mix together sour cream and salsa to create the dressing.', 'Drizzle the dressing over the salad and toss again.', 'Gently fold in the diced avocado.', 'Serve the taco salad with crushed tortilla chips on top.']
+    ],
+    [
+        'id' => 18,
+        'name' => 'Cabbage Parmesan',
+        'image' => 'rec/Rec18.jpg',
+        'benefit' => 'Weight-gain',
+        'category' => 'Veg',
+        'nutrients' => ['Calories' => 300, 'Protein' => 25, 'Fat' => 15, 'Carbohydrates' => 10, 'Fiber' => 3, 'Sugar' => 2, 'Sodium' => 500],
+        'ingredients' => ['1 medium-sized cabbage, cut into thick wedges', '1 cup grated Parmesan cheese', '1 cup breadcrumbs', '2 eggs, beaten', '1 cup marinara sauce', '1 cup shredded mozzarella cheese', '2 cloves garlic, minced', '1 teaspoon dried oregano', 'Salt and pepper to taste', 'Olive oil for drizzling'],
+        'instructions' => ['Preheat the oven to 375°F (190°C).', 'Mix breadcrumbs, Parmesan cheese, garlic, oregano, salt, and pepper in a bowl.', 'Dip each cabbage wedge into the beaten eggs, then coat with the breadcrumb mixture.', 'Place the coated cabbage wedges in a baking dish.', 'Drizzle olive oil over the top and bake for 25-30 minutes until golden.', 'Remove from the oven, pour marinara sauce over the cabbage, and top with mozzarella cheese.', 'Return to the oven and bake for an additional 15 minutes, or until the cheese is melted and bubbly.', 'Serve hot.']
+    ],
+    [
+        'id' => 19,
+        'name' => 'Egg Bhurji',
+        'image' => 'rec/Rec3.jpg',
+        'benefit' => 'Weight-loss',
+        'category' => 'Non-Veg',
+        'nutrients' => ['Calories' => 273, 'Protein' => 25, 'Fat' => 11, 'Carbohydrates' => 23, 'Fiber' => 6, 'Calcium' => 87, 'Iron' => 3],
+        'ingredients' => ['4 eggs', '1 large onion, finely chopped', '2 medium tomatoes, chopped', '1 green chili, chopped', '1/2 inch ginger, grated', '1/2 tsp turmeric powder', '1/2 tsp red chili powder', '1/2 tsp garam masala', '2 tbsp oil', 'Salt to taste', 'Fresh coriander for garnish'],
+        'instructions' => ['Heat oil in a pan. Add chopped onions and sauté until they turn translucent.', 'Add grated ginger and green chili. Sauté for a minute.', 'Add chopped tomatoes and cook until they become soft.', 'Add turmeric powder, red chili powder, and salt. Mix well.', 'Break the eggs directly into the pan and scramble them.', 'Cook, stirring continuously, until the eggs are cooked to your liking.', 'Sprinkle garam masala and garnish with fresh coriander.', 'Serve hot with roti or bread.']
+    ],
+    [
+        'id' => 20,
+        'name' => 'Butternut Squash Curry',
+        'image' => 'rec/Rec20.jpg',
+        'benefit' => 'Weight-gain',
+        'category' => 'Veg',
+        'nutrients' => ['Calories' => 300, 'Protein' => 25, 'Fat' => 15, 'Carbohydrates' => 10, 'Fiber' => 3, 'Sugar' => 2, 'Sodium' => 500],
+        'ingredients' => ['1 medium-sized butternut squash, peeled and diced', '1 onion, finely chopped', '2 cloves garlic, minced', '1-inch ginger, grated', '1 can (400 ml) coconut milk', '2 tablespoons curry powder', '1 teaspoon turmeric powder', 'Salt and pepper to taste', '2 tablespoons vegetable oil', 'Fresh cilantro leaves for garnish', 'Cooked rice or naan for serving'],
+        'instructions' => ['Heat vegetable oil in a large pan over medium heat.', 'Add chopped onion and cook until translucent.', 'Add minced garlic and grated ginger, sauté for a minute.', 'Add curry powder and turmeric powder. Stir well.', 'Add diced butternut squash to the pan and mix until coated with spices.', 'Pour in the coconut milk and bring the mixture to a simmer. Cover and cook until the squash is tender (about 15-20 minutes).', 'Season with salt and pepper to taste.', 'Garnish with fresh cilantro leaves and serve over rice or with naan.']
+    ]
+];
+
+// 2. =================================================================
+//    FILTERING LOGIC
+//    This code checks if the form was submitted. If so, it filters
+//    the $recipes array based on the min and max calorie inputs.
+// ===================================================================
+$filtered_recipes = $recipes; // Start by assuming we show all recipes
+
+if ($_SERVER["REQUEST_METHOD"] == "GET" && (isset($_GET['min_calories']) || isset($_GET['max_calories']))) {
+    
+    // Sanitize inputs to ensure they are numbers
+    $min_calories = !empty($_GET['min_calories']) ? (int)$_GET['min_calories'] : 0;
+    $max_calories = !empty($_GET['max_calories']) ? (int)$_GET['max_calories'] : PHP_INT_MAX;
+
+    // If max calories is not provided but min is, set max to a very large number
+    if ($min_calories > 0 && $max_calories === PHP_INT_MAX) {
+        // This is a reasonable upper bound if max is not set.
+    }
+
+    // If max is less than min, it's an invalid range. Show no results.
+    if ($max_calories < $min_calories) {
+        $filtered_recipes = [];
+    } else {
+        $result = [];
+        foreach ($recipes as $recipe) {
+            $calories = $recipe['nutrients']['Calories'];
+            if ($calories >= $min_calories && $calories <= $max_calories) {
+                $result[] = $recipe;
+            }
+        }
+        $filtered_recipes = $result;
+    }
+}
 ?>
 
 <head>
-    <title>FitBite</title>
+    <title>FitBite - Recipes</title>
     <link rel="stylesheet" href="recepies.css">
     <link rel="icon" href="img/icon.png">
+    <style>
+        /* Added some basic styling for the new filter form */
+        .filter-container {
+            background-color: #f0f0f0;
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            max-width: 800px;
+            text-align: center;
+        }
+        .filter-container form {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+        .filter-container label {
+            font-weight: bold;
+        }
+        .filter-container input[type="number"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100px;
+        }
+        .filter-container button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .filter-container button:hover {
+            background-color: #0056b3;
+        }
+        .no-results {
+            text-align: center;
+            font-size: 1.2em;
+            color: #555;
+            margin: 40px auto;
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
 
+    <div class="filter-container">
+        <h2>Filter Recipes by Calories</h2>
+        <form action="recepies.php" method="GET">
+            <div>
+                <label for="min_calories">Min Calories:</label>
+                <input type="number" id="min_calories" name="min_calories" min="0" placeholder="e.g., 100" value="<?php echo isset($_GET['min_calories']) ? htmlspecialchars($_GET['min_calories']) : ''; ?>">
+            </div>
+            <div>
+                <label for="max_calories">Max Calories:</label>
+                <input type="number" id="max_calories" name="max_calories" min="0" placeholder="e.g., 300" value="<?php echo isset($_GET['max_calories']) ? htmlspecialchars($_GET['max_calories']) : ''; ?>">
+            </div>
+            <button type="submit">Filter</button>
+        </form>
+    </div>
+
+
     <div class="card-container">
-        <div id="card">
-            <img src="rec/Rec1.jpg" alt="Card Image 1" width="200px">
-            <div class="card-content">
-                <h2> <b> <i> Masala Oats </b> </i> </h2>
-                <h3>Benificial for Weight-loss</h3>
-                <table>
-                    <tr>
-                        <th>Category</th>
-                        <th>Veg</th>
-                    </tr>
-                    <tr>
-                        <th>Nutrient</th>
-                        <th>Amount</th>
-                    </tr>
-                    <tr>
-                        <td>Calories</td>
-                        <td>153 kcal</td>
-                    </tr>
-                    <tr>
-                        <td>Protein</td>
-                        <td>11.3g</td>
-                    </tr>
-                    <tr>
-                        <td>Carbohydrates</td>
-                        <td>27g</td>
-                    </tr>
-                    <tr>
-                        <td>Fat</td>
-                        <td>20g</td>
-                    </tr>
-                    <tr>
-                        <td>Fiber</td>
-                        <td>3g</td>
-                    </tr>
-                    <tr>
-                        <td>Sugar</td>
-                        <td>6.3g</td>
-                    </tr>
-                    <tr>
-                        <td>Sodium</td>
-                        <td>270mg</td>
-                    </tr>
-                </table>
-                <h2>Ingredients:</h2>
-                <ul>
-                    <li>4 large bell peppers, halved and seeds removed</li>
-                    <li>1 lb (about 450g) boneless, skinless chicken breasts, cooked and shredded</li>
-                    <li>1 cup cherry tomatoes, halved</li>
-                    <li>1 cup fresh mozzarella balls, cut into small pieces</li>
-                    <li>1/4 cup fresh basil, chopped</li>
-                    <li>2 cloves garlic, minced</li>
-                    <li>1/4 cup balsamic glaze</li>
-                    <li>Salt and pepper to taste</li>
-                    <li>2 tablespoons olive oil</li>
-                </ul>
+        <?php if (!empty($filtered_recipes)): ?>
+            <?php foreach ($filtered_recipes as $recipe): ?>
+                <div id="card">
+                    <img src="<?php echo htmlspecialchars($recipe['image']); ?>" alt="<?php echo htmlspecialchars($recipe['name']); ?>" width="200px">
+                    <div class="card-content">
+                        <h2> <b> <i> <?php echo htmlspecialchars($recipe['name']); ?> </b> </i> </h2>
+                        <h3>Beneficial for <?php echo htmlspecialchars($recipe['benefit']); ?></h3>
+                        <table>
+                            <tr>
+                                <th>Category</th>
+                                <th><?php echo htmlspecialchars($recipe['category']); ?></th>
+                            </tr>
+                            <tr>
+                                <th>Nutrient</th>
+                                <th>Amount</th>
+                            </tr>
+                            <?php foreach ($recipe['nutrients'] as $nutrient => $amount): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($nutrient); ?></td>
+                                <td>
+                                    <?php 
+                                        echo htmlspecialchars($amount); 
+                                        if ($nutrient == 'Calories') echo ' kcal';
+                                        elseif ($nutrient == 'Protein' || $nutrient == 'Fat' || $nutrient == 'Carbohydrates' || $nutrient == 'Fiber' || $nutrient == 'Sugar') echo 'g';
+                                        elseif ($nutrient == 'Sodium' || $nutrient == 'Cholestrol' || $nutrient == 'Calcium' || $nutrient == 'Iron') echo 'mg';
+                                    ?>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </table>
+                        
+                        <h2>Ingredients:</h2>
+                        <ul>
+                            <?php foreach ($recipe['ingredients'] as $ingredient): ?>
+                                <li><?php echo htmlspecialchars($ingredient); ?></li>
+                            <?php endforeach; ?>
+                        </ul>
 
-                <h2>Instructions:</h2>
-                <ol>
-                    <li>Preheat the oven to 375°F (190°C).</li>
-                    <li>In a bowl, mix together the shredded chicken, cherry tomatoes, mozzarella, basil, minced garlic,
-                        salt, and pepper.</li>
-                    <li>Drizzle olive oil over the halved bell peppers and place them in a baking dish.</li>
-                    <li>Spoon the chicken mixture into each pepper half.</li>
-                    <li>Drizzle balsamic glaze over the stuffed peppers.</li>
-                    <li>Bake in the preheated oven for 25-30 minutes or until the peppers are tender.</li>
-                    <li>Remove from the oven, let them cool slightly, and garnish with additional fresh basil if
-                        desired.</li>
-                    <li>Serve and enjoy your Caprese Chicken Stuffed Peppers!</li>
-                </ol>
-            </div>
-        </div>
+                        <h2>Instructions:</h2>
+                        <ol>
+                            <?php foreach ($recipe['instructions'] as $instruction): ?>
+                                <li><?php echo htmlspecialchars($instruction); ?></li>
+                            <?php endforeach; ?>
+                        </ol>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p class="no-results">No recipes found matching your criteria. Please try a different calorie range.</p>
+        <?php endif; ?>
 
-        <div id="card">
-            <img src="rec/Rec2.jpg" alt="Card Image 2" width="200px">
-            <div class="card-content">
-                <h2> <b> <i> Chickpea Salad </b> </i> </h2>
-                <h3>Benificial for Weight-loss</h3>
-                <table>
-                    <tr>
-                        <th>Category</th>
-                        <th>Veg</th>
-                    </tr>
-                    <tr>
-                        <th>Nutrient</th>
-                        <th>Amount</th>
-                    </tr>
-                    <tr>
-                        <td>Calories</td>
-                        <td>167cal</td>
-                    </tr>
-                    <tr>
-                        <td>Protein</td>
-                        <td>8.1g</td>
-                    </tr>
-                    <tr>
-                        <td>Fat</td>
-                        <td>15g</td>
-                    </tr>
-                    <tr>
-                        <td>Carbohydrates</td>
-                        <td>28.5g</td>
-                    </tr>
-                    <tr>
-                        <td>Fiber</td>
-                        <td>13.4g</td>
-                    </tr>
-                    <tr>
-                        <td>Sugar</td>
-                        <td>7.87g</td>
-                    </tr>
-                    <tr>
-                        <td>Fat</td>
-                        <td>2.3g</td>
-                    </tr>
-                    <tr>
-                        <td>Calcium</td>
-                        <td>80.36mg</td>
-                    </tr>
-                    <tr>
-                        <td>Energy</td>
-                        <td>268.96kcal</td>
-                    </tr>
-                </table>
-                <h2>Ingredients:</h2>
-                <ul>
-                    <li>1 can chickpeas rinsed and drained</li>
-                    <li>3 stalked celery (diced)</li>
-                    <li>1 of red and orange peppers (diced)</li>
-                    <li>1 whole cucumber (diced)</li>
-                    <li>1/4 cup of lemon juice(freshly squeezed)</li>
-                    <li>1/2 tsp sea Salt</li>
-                    <li>1 clove garlic(minced)</li>
-                    <li>1/2 cup olive oil</li>
-                </ul>
-
-                <h2>Instructions:</h2>
-                <ol>
-                    <li>Preheat your oven to 400°F (200°C).</li>
-                    <li>Place the salmon fillets on a baking sheet lined with parchment paper.</li>
-                    <li>Drizzle olive oil over the salmon fillets and rub to coat evenly.</li>
-                    <li>Sprinkle dried oregano, dried thyme, and garlic powder evenly over the fillets.</li>
-                    <li>Place lemon slices on top of the salmon fillets.</li>
-                    <li>Season with salt and black pepper to taste.</li>
-                    <li>Bake in the preheated oven for 15-20 minutes or until the salmon is cooked through and flakes
-                        easily with a fork.</li>
-                    <li>Optional: Sprinkle crumbled feta cheese on top before serving.</li>
-                    <li>Garnish with fresh parsley and serve hot.</li>
-                </ol>
-            </div>
-        </div>
-
-        <div id="card">
-            <img src="rec/Rec19.jpg" alt="Card Image 19" width="200px">
-            <div class="card-content">
-                <h2>Goddess Bowls</h2>
-                <h3>Benificial for Weight-gain</h3>
-                <table>
-                    <tr>
-                        <th>Category</th>
-                        <th>Veg</th>
-                    </tr>
-                    <tr>
-                        <th>Nutrient</th>
-                        <th>Amount</th>
-                    </tr>
-                    <tr>
-                        <td>Calories</td>
-                        <td>300kcal</td>
-                    </tr>
-                    <tr>
-                        <td>Protein</td>
-                        <td>25g</td>
-                    </tr>
-                    <tr>
-                        <td>Fat</td>
-                        <td>15g</td>
-                    </tr>
-                    <tr>
-                        <td>Carbohydrates</td>
-                        <td>10g</td>
-                    </tr>
-                    <tr>
-                        <td>Fiber</td>
-                        <td>3g</td>
-                    </tr>
-                    <tr>
-                        <td>Sugar</td>
-                        <td>2g</td>
-                    </tr>
-                    <tr>
-                        <td>Sodium</td>
-                        <td>500mg</td>
-                    </tr>
-                </table>
-                <h2>Ingredients:</h2>
-                <ul>
-                    <li>2 cups quinoa, cooked</li>
-                    <li>1 cup chickpeas, cooked</li>
-                    <li>1 cup cherry tomatoes, halved</li>
-                    <li>1 cucumber, diced</li>
-                    <li>1 avocado, sliced</li>
-                    <li>1/2 cup red onion, finely chopped</li>
-                    <li>1/4 cup Kalamata olives, sliced</li>
-                    <li>1/4 cup feta cheese, crumbled</li>
-                    <li>1/4 cup fresh parsley, chopped</li>
-                    <li>1/4 cup tahini dressing</li>
-                    <li>Salt and pepper to taste</li>
-                </ul>
-
-                <h2>Steps:</h2>
-                <ol>
-                    <li>Cook quinoa according to package instructions.</li>
-                    <li>In a large bowl, combine cooked quinoa, chickpeas, cherry tomatoes, cucumber, avocado, red
-                        onion, olives, and feta cheese.</li>
-                    <li>Drizzle the tahini dressing over the bowl.</li>
-                    <li>Gently toss the ingredients to combine.</li>
-                    <li>Season with salt and pepper to taste.</li>
-                    <li>Sprinkle fresh parsley on top.</li>
-                    <li>Serve and enjoy your delicious Goddess Bowl!</li>
-                </ol>
-            </div>
-        </div>
-
-        <div id="card">
-            <img src="rec/Rec4.jpg" alt="Card Image 4" width="200px">
-            <div class="card-content">
-                <h2> <b> <i> Sprouts Salad </b> </i> </h2>
-                <h3>Benificial for Weight-loss</h3>
-                <table>
-                    <tr>
-                        <th>Category</th>
-                        <th>Veg</th>
-                    </tr>
-                    <tr>
-                        <th>Nutrient</th>
-                        <th>Amount</th>
-                    </tr>
-                    <tr>
-                        <td>Calories</td>
-                        <td>154kcal</td>
-                    </tr>
-                    <tr>
-                        <td>Protein</td>
-                        <td>9.2g</td>
-                    </tr>
-                    <tr>
-                        <td>Fat</td>
-                        <td>0.9g</td>
-                    </tr>
-                    <tr>
-                        <td>Carbohydrates</td>
-                        <td>30g</td>
-                    </tr>
-                    <tr>
-                        <td>Fiber</td>
-                        <td>11g</td>
-                    </tr>
-                    <tr>
-                        <td>Sugar</td>
-                        <td>6.1g</td>
-                    </tr>
-                    <tr>
-                        <td>Sodium</td>
-                        <td>446mg</td>
-                    </tr>
-                </table>
-                <h2>Ingredients:</h2>
-                <ul>
-                    <li>1 head of cauliflower, cut into florets</li>
-                    <li>1 cup all-purpose flour</li>
-                    <li>1 cup water</li>
-                    <li>1 teaspoon chili powder</li>
-                    <li>1 teaspoon cumin</li>
-                    <li>1/2 teaspoon garlic powder</li>
-                    <li>1/2 teaspoon onion powder</li>
-                    <li>1/4 teaspoon paprika</li>
-                    <li>Salt and pepper to taste</li>
-                    <li>8 small corn or flour tortillas</li>
-                    <li>Optional toppings: shredded lettuce, diced tomatoes, salsa, guacamole, sour cream</li>
-                </ul>
-
-                <h2>Instructions:</h2>
-                <ol>
-                    <li>Preheat the oven to 425°F (220°C).</li>
-                    <li>In a bowl, whisk together the flour, water, chili powder, cumin, garlic powder, onion powder,
-                        paprika, salt, and pepper to create a smooth batter.</li>
-                    <li>Dip each cauliflower floret into the batter, ensuring it's well coated, and place them on a
-                        baking sheet lined with parchment paper.</li>
-                    <li>Bake the cauliflower in the preheated oven for 20-25 minutes or until golden and crispy.</li>
-                    <li>While the cauliflower is baking, warm the tortillas in a dry skillet or microwave.</li>
-                    <li>Once the cauliflower is done, assemble your tacos by placing a few florets in each tortilla and
-                        adding your favorite toppings.</li>
-                    <li>Serve immediately and enjoy your delicious Cauliflower Tacos!</li>
-                </ol>
-            </div>
-        </div>
-
-        <div id="card">
-            <img src="rec/Rec5.jpg" alt="Card Image 5" width="200px">
-            <div class="card-content">
-                <h2> <b> <i> Chicken Tikka Kebab </b> </i> </h2>
-                <h3>Benificial for Weight-loss</h3>
-                <table>
-                    <tr>
-                        <th>Category</th>
-                        <th>Non-Veg</th>
-                    </tr>
-                    <tr>
-                        <th>Nutrient</th>
-                        <th>Amount</th>
-                    </tr>
-                    <tr>
-                        <td>Calories</td>
-                        <td>300kcal</td>
-                    </tr>
-                    <tr>
-                        <td>Protein</td>
-                        <td>33g</td>
-                    </tr>
-                    <tr>
-                        <td>Fat</td>
-                        <td>12g</td>
-                    </tr>
-                    <tr>
-                        <td>Carbohydrates</td>
-                        <td>11g</td>
-                    </tr>
-                    <tr>
-                        <td>Cholestrol</td>
-                        <td>82mg</td>
-                    </tr>
-                    <tr>
-                        <td>Sugar</td>
-                        <td>5.5g</td>
-                    </tr>
-                    <tr>
-                        <td>Sodium</td>
-                        <td>268mg</td>
-                    </tr>
-                </table>
-                <h3>Ingredients:</h3>
-                <ul>
-                    <li>1 block of firm tofu, pressed and cubed</li>
-                    <li>2 cups broccoli florets</li>
-                    <li>2 tablespoons sesame oil</li>
-                    <li>3 tablespoons soy sauce</li>
-                    <li>2 tablespoons rice vinegar</li>
-                    <li>1 tablespoon maple syrup or agave nectar</li>
-                    <li>2 cloves garlic, minced</li>
-                    <li>1 tablespoon fresh ginger, grated</li>
-                    <li>2 tablespoons sesame seeds</li>
-                    <li>2 green onions, chopped (for garnish)</li>
-                    <li>Cooked rice or noodles (optional, for serving)</li>
-                </ul>
-
-                <h2>Instructions:</h2>
-                <ol>
-                    <li>Press the tofu to remove excess water, then cut it into cubes.</li>
-                    <li>Steam or blanch the broccoli until it's tender but still crisp. Set aside.</li>
-                    <li>In a large pan or wok, heat sesame oil over medium heat.</li>
-                    <li>Add tofu cubes and cook until golden brown on all sides.</li>
-                    <li>In a small bowl, mix soy sauce, rice vinegar, maple syrup, minced garlic, and grated ginger to
-                        make the sauce.</li>
-                    <li>Pour the sauce over the tofu and stir to coat evenly.</li>
-                    <li>Add steamed broccoli to the pan and toss everything together until well combined.</li>
-                    <li>Sprinkle sesame seeds over the dish and continue to cook for an additional 2-3 minutes.</li>
-                    <li>Remove from heat and garnish with chopped green onions.</li>
-                    <li>Serve over cooked rice or noodles if desired.</li>
-                </ol>
-            </div>
-        </div>
-
-        <div id="card">
-            <img src="rec/Rec6.jpg" alt="Card Image 6" width="200px">
-            <div class="card-content">
-                <h2> <b> <i> Chicken Curry </b> </i> </h2>
-                <h3>Benificial for Weight-loss</h3>
-                <table>
-                    <tr>
-                        <th>Category</th>
-                        <th>Non-Veg</th>
-                    </tr>
-                    <tr>
-                        <th>Nutrient</th>
-                        <th>Amount</th>
-                    </tr>
-                    <tr>
-                        <td>Calories</td>
-                        <td>243kcal</td>
-                    </tr>
-                    <tr>
-                        <td>Protein</td>
-                        <td>25g</td>
-                    </tr>
-                    <tr>
-                        <td>Fat</td>
-                        <td>11g</td>
-                    </tr>
-                    <tr>
-                        <td>Carbohydrates</td>
-                        <td>7.5g</td>
-                    </tr>
-                    <tr>
-                        <td>Fiber</td>
-                        <td>1.5g</td>
-                    </tr>
-                    <tr>
-                        <td>Sugar</td>
-                        <td>2g</td>
-                    </tr>
-                    <tr>
-                        <td>Sodium</td>
-                        <td>73mg</td>
-                    </tr>
-                    <tr>
-                        <td>Cholestrol</td>
-                        <td>74mg</td>
-                    </tr>
-                </table>
-                <h2>Ingredients:</h2>
-                <ul>
-                    <li>1 lb ground beef</li>
-                    <li>1 cup rice, uncooked</li>
-                    <li>1 medium cabbage, shredded</li>
-                    <li>1 onion, finely chopped</li>
-                    <li>2 cloves garlic, minced</li>
-                    <li>1 can (15 oz) tomato sauce</li>
-                    <li>1 can (14 oz) diced tomatoes, undrained</li>
-                    <li>1 cup beef broth</li>
-                    <li>1 teaspoon dried oregano</li>
-                    <li>1 teaspoon dried basil</li>
-                    <li>Salt and pepper to taste</li>
-                    <li>1 cup shredded mozzarella cheese (optional for topping)</li>
-                </ul>
-
-                <h2>Instructions:</h2>
-                <ol>
-                    <li>In a large skillet over medium heat, brown the ground beef.</li>
-                    <li>Add the chopped onion and minced garlic, sauté until the onion is softened.</li>
-                    <li>Stir in the shredded cabbage and cook until wilted.</li>
-                    <li>Add the uncooked rice, tomato sauce, diced tomatoes, beef broth, oregano, basil, salt, and
-                        pepper. Mix well.</li>
-                    <li>Bring the mixture to a simmer, then reduce heat to low, cover, and let it cook for about 20-25
-                        minutes or until the rice is tender, stirring occasionally.</li>
-                    <li>If desired, sprinkle shredded mozzarella cheese on top, cover the skillet, and let it melt.</li>
-                    <li>Once the cheese is melted, remove from heat and let it Rect for a few minutes before serving.
-                    </li>
-                    <li>Serve hot and enjoy your delicious Cabbage Roll Skillet!</li>
-                </ol>
-            </div>
-        </div>
-
-        <div id="card">
-            <img src="rec/Rec7.jpg" alt="Card Image 7" width="200px">
-            <div class="card-content">
-                <h2> <b> <i> Daal Makhni </b> </i> </h2>
-                <h3>Benificial for Muscle-gain</h3>
-                <table>
-                    <tr>
-                        <th>Category</th>
-                        <th>Veg</th>
-                    </tr>
-                    <tr>
-                        <th>Nutrient</th>
-                        <th>Amount</th>
-                    </tr>
-                    <tr>
-                        <td>Calories</td>
-                        <td>300kcal</td>
-                    </tr>
-                    <tr>
-                        <td>Protein</td>
-                        <td>25g</td>
-                    </tr>
-                    <tr>
-                        <td>Fat</td>
-                        <td>15g</td>
-                    </tr>
-                    <tr>
-                        <td>Carbohydrates</td>
-                        <td>10g</td>
-                    </tr>
-                    <tr>
-                        <td>Fiber</td>
-                        <td>3g</td>
-                    </tr>
-                    <tr>
-                        <td>Sugar</td>
-                        <td>2g</td>
-                    </tr>
-                    <tr>
-                        <td>Sodium</td>
-                        <td>500mg</td>
-                    </tr>
-                </table>
-                <h2>Ingredients:</h2>
-                <ul>
-                    <li>1 lb spicy turkey sausage, casings removed</li>
-                    <li>1 large onion, diced</li>
-                    <li>3 cloves garlic, minced</li>
-                    <li>1 red bell pepper, diced</li>
-                    <li>1 yellow bell pepper, diced</li>
-                    <li>1 can (15 oz) black beans, drained and rinsed</li>
-                    <li>1 can (15 oz) kidney beans, drained and rinsed</li>
-                    <li>1 can (28 oz) crushed tomatoes</li>
-                    <li>4 cups kale, chopped</li>
-                    <li>2 tablespoons chili powder</li>
-                    <li>1 teaspoon cumin</li>
-                    <li>1/2 teaspoon paprika</li>
-                    <li>Salt and pepper to taste</li>
-                    <li>2 tablespoons olive oil</li>
-                    <li>Optional toppings: shredded cheese, sour cream, chopped green onions</li>
-                </ul>
-
-                <h2>Instructions:</h2>
-                <ol>
-                    <li>In a large pot, heat olive oil over medium heat.</li>
-                    <li>Add spicy turkey sausage, breaking it into crumbles as it cooks. Cook until browned.</li>
-                    <li>Add diced onion and minced garlic. Sauté until onions are translucent.</li>
-                    <li>Add diced red and yellow bell peppers. Cook for an additional 3-5 minutes.</li>
-                    <li>Stir in chili powder, cumin, paprika, salt, and pepper.</li>
-                    <li>Add black beans, kidney beans, crushed tomatoes, and chopped kale. Stir well.</li>
-                    <li>Bring the chili to a simmer, reduce heat to low, cover, and let it cook for about 20-25 minutes.
-                    </li>
-                    <li>Adjust seasoning if needed. Serve hot with optional toppings like shredded cheese, sour cream,
-                        or chopped green onions.</li>
-                </ol>
-
-            </div>
-        </div>
-
-        <div id="card">
-            <img src="rec/Rec8.jpg" alt="Card Image 8" width="200px">
-            <div class="card-content">
-                <h2> <b> <i> Rajma Chawal </b> </i> </h2>
-                <h3>Benificial for Muscle-gain</h3>
-                <table>
-                    <tr>
-                        <th>Category</th>
-                        <th>Veg</th>
-                    </tr>
-                    <tr>
-                        <th>Nutrient</th>
-                        <th>Amount</th>
-                    </tr>
-                    <tr>
-                        <td>Calories</td>
-                        <td>300kcal</td>
-                    </tr>
-                    <tr>
-                        <td>Protein</td>
-                        <td>25g</td>
-                    </tr>
-                    <tr>
-                        <td>Fat</td>
-                        <td>15g</td>
-                    </tr>
-                    <tr>
-                        <td>Carbohydrates</td>
-                        <td>10g</td>
-                    </tr>
-                    <tr>
-                        <td>Fiber</td>
-                        <td>3g</td>
-                    </tr>
-                    <tr>
-                        <td>Sugar</td>
-                        <td>2g</td>
-                    </tr>
-                    <tr>
-                        <td>Sodium</td>
-                        <td>500mg</td>
-                    </tr>
-                </table>
-                <h2>Ingredients:</h2>
-                <ul>
-                    <li>1 pound Brussels sprouts, trimmed and thinly sliced</li>
-                    <li>1 cup cherry tomatoes, halved</li>
-                    <li>1/2 cup black olives, sliced</li>
-                    <li>1/2 cup pepperoni, sliced</li>
-                    <li>1/4 cup red onion, finely chopped</li>
-                    <li>1/4 cup fresh mozzarella, diced</li>
-                    <li>1/4 cup fresh basil, chopped</li>
-                    <li>1/4 cup Parmesan cheese, grated</li>
-                    <li>Salt and pepper to taste</li>
-                    <li>3 tablespoons extra-virgin olive oil</li>
-                    <li>2 tablespoons balsamic vinegar</li>
-                </ul>
-
-                <h2>Instructions:</h2>
-                <ol>
-                    <li>In a large bowl, combine the sliced Brussels sprouts, cherry tomatoes, black olives, pepperoni,
-                        red onion, mozzarella, and basil.</li>
-                    <li>In a small bowl, whisk together the olive oil and balsamic vinegar to create the dressing.</li>
-                    <li>Pour the dressing over the salad and toss until well combined.</li>
-                    <li>Add salt and pepper to taste.</li>
-                    <li>Sprinkle grated Parmesan cheese on top and toss again.</li>
-                    <li>Refrigerate for at least 30 minutes before serving to allow the flavors to meld.</li>
-                    <li>Serve chilled and enjoy your delicious Italian Antipasto Brussels Sprouts Salad!</li>
-                </ol>
-            </div>
-        </div>
-
-        <div id="card">
-            <img src="rec/Rec9.jpg" alt="Card Image 9" width="200px">
-            <div class="card-content">
-                <h2> <b> <i> Paneer Tikka </b> </i> </h2>
-                <h3>Benificial for Muscle-gain</h3>
-                <table>
-                    <tr>
-                        <th>Category</th>
-                        <th>Non-Veg</th>
-                    </tr>
-                    <tr>
-                        <th>Nutrient</th>
-                        <th>Amount</th>
-                    </tr>
-                    <tr>
-                        <td>Calories</td>
-                        <td>300kcal</td>
-                    </tr>
-                    <tr>
-                        <td>Protein</td>
-                        <td>25g</td>
-                    </tr>
-                    <tr>
-                        <td>Fat</td>
-                        <td>15g</td>
-                    </tr>
-                    <tr>
-                        <td>Carbohydrates</td>
-                        <td>10g</td>
-                    </tr>
-                    <tr>
-                        <td>Fiber</td>
-                        <td>3g</td>
-                    </tr>
-                    <tr>
-                        <td>Sugar</td>
-                        <td>2g</td>
-                    </tr>
-                    <tr>
-                        <td>Sodium</td>
-                        <td>500mg</td>
-                    </tr>
-                </table>
-                <h2>Ingredients:</h2>
-                <ul>
-                    <li>8 corn tortillas</li>
-                    <li>1 can (15 oz) black beans, drained and rinsed</li>
-                    <li>1 cup diced tomatoes</li>
-                    <li>1 cup shredded lettuce</li>
-                    <li>1 cup shredded cheese (cheddar or Mexican blend)</li>
-                    <li>1/2 cup diced red onion</li>
-                    <li>1/4 cup chopped fresh cilantro</li>
-                    <li>1 avocado, sliced</li>
-                    <li>1 lime, cut into wedges</li>
-                    <li>Salt and pepper to taste</li>
-                    <li>Optional toppings: sour cream, salsa, hot sauce</li>
-                </ul>
-
-                <h2>Instructions:</h2>
-                <ol>
-                    <li>Preheat the oven to 400°F (200°C).</li>
-                    <li>Place the corn tortillas directly on the oven racks and bake for 5-7 minutes or until they
-                        become crispy and golden brown.</li>
-                    <li>In a small saucepan, heat the black beans over medium heat. Season with salt and pepper to
-                        taste.</li>
-                    <li>Spread a layer of black beans on each crispy tortilla.</li>
-                    <li>Top with diced tomatoes, shredded lettuce, shredded cheese, diced red onion, and chopped
-                        cilantro.</li>
-                    <li>Place avocado slices on top and squeeze lime juice over the tostadas.</li>
-                    <li>Optional: Add sour cream, salsa, or hot sauce according to your preference.</li>
-                    <li>Serve immediately and enjoy your delicious Black Bean Tostadas!</li>
-                </ol>>
-            </div>
-        </div>
-
-        <div id="card">
-            <img src="rec/Rec10.jpg" alt="Card Image 10" width="200px">
-            <div class="card-content">
-                <h2> <b> <i> Grilled Chicken Breast </b> </i> </h2>
-                <h3>Benificial for Muscle-gain</h3>
-                <table>
-                    <tr>
-                        <th>Category</th>
-                        <th>Non-Veg</th>
-                    </tr>
-                    <tr>
-                        <th>Nutrient</th>
-                        <th>Amount</th>
-                    </tr>
-                    <tr>
-                        <td>Calories</td>
-                        <td>300kcal</td>
-                    </tr>
-                    <tr>
-                        <td>Protein</td>
-                        <td>25g</td>
-                    </tr>
-                    <tr>
-                        <td>Fat</td>
-                        <td>15g</td>
-                    </tr>
-                    <tr>
-                        <td>Carbohydrates</td>
-                        <td>10g</td>
-                    </tr>
-                    <tr>
-                        <td>Fiber</td>
-                        <td>3g</td>
-                    </tr>
-                    <tr>
-                        <td>Sugar</td>
-                        <td>2g</td>
-                    </tr>
-                    <tr>
-                        <td>Sodium</td>
-                        <td>500mg</td>
-                    </tr>
-                </table>
-                <h2>Ingredients:</h2>
-                <ul>
-                    <li>1 cup cooked quinoa</li>
-                    <li>1 cup black beans, drained and rinsed</li>
-                    <li>1 cup corn kernels (fresh or frozen)</li>
-                    <li>1 cup cherry tomatoes, halved</li>
-                    <li>1 avocado, sliced</li>
-                    <li>1/2 cup red onion, finely chopped</li>
-                    <li>1/4 cup fresh cilantro, chopped</li>
-                    <li>Juice of 1 lime</li>
-                    <li>Salt and pepper to taste</li>
-                    <li>Optional toppings: shredded cheese, Greek yogurt, salsa</li>
-                </ul>
-
-                <h2>Instructions:</h2>
-                <ol>
-                    <li>In a large bowl, combine cooked quinoa, black beans, corn, cherry tomatoes, avocado, red onion,
-                        and cilantro.</li>
-                    <li>Drizzle the lime juice over the ingredients and toss gently to combine.</li>
-                    <li>Season with salt and pepper to taste.</li>
-                    <li>If desired, add optional toppings such as shredded cheese, Greek yogurt, or salsa.</li>
-                    <li>Serve immediately and enjoy your delicious CopyCat Sweet Bean Harvest Bowl!</li>
-                </ol>
-
-            </div>
-        </div>
-
-        <div id="card">
-            <img src="rec/Rec11.jpg" alt="Card Image 11" width="200px">
-            <div class="card-content">
-                <h2> <b> <i> Spicky Baked Fish </b> </i> </h2>
-                <h3>Benificial for Muscle-gain</h3>
-                <table>
-                    <tr>
-                        <th>Category</th>
-                        <th>Non-Veg</th>
-                    </tr>
-                    <tr>
-                        <th>Nutrient</th>
-                        <th>Amount</th>
-                    </tr>
-                    <tr>
-                        <td>Calories</td>
-                        <td>300kcal</td>
-                    </tr>
-                    <tr>
-                        <td>Protein</td>
-                        <td>25g</td>
-                    </tr>
-                    <tr>
-                        <td>Fat</td>
-                        <td>15g</td>
-                    </tr>
-                    <tr>
-                        <td>Carbohydrates</td>
-                        <td>10g</td>
-                    </tr>
-                    <tr>
-                        <td>Fiber</td>
-                        <td>3g</td>
-                    </tr>
-                    <tr>
-                        <td>Sugar</td>
-                        <td>2g</td>
-                    </tr>
-                    <tr>
-                        <td>Sodium</td>
-                        <td>500mg</td>
-                    </tr>
-                </table>
-                <h2>Ingredients:</h2>
-                <ul>
-                    <li>1 pound salmon or any white fish, fresh or frozen.</li>
-                    <li> 1/4 teaspoon paprika.</li>
-                    <li> 1/4 teaspoon onion powder.</li>
-                    <li> 1/4 teaspoon garlic powder.</li>
-                    <li>1/8 teaspoon black pepper.</li>
-                    <li>1/8 teaspoon dried oregano.</li>
-                    <li> 1/8 teaspoon dried thyme.</li>
-                    <li> 1 tablespoon lemon juice.</li>
-                    <li> 1 1/2 tablespoons soft melted margarine.</li>
-                </ul>
-
-                <h2>Instructions:</h2>
-                <ol>
-                    <li>If using frozen fish, thaw in refrigerator according to package directions.</li>
-                    <li>Preheat oven to 350 degrees F.</li>
-                    <li> Separate (or cut) fish into 4 pieces. Place fish in a 9x13x2 inch baking pan.</li>
-                    <li> Combine paprika, garlic and onion powder, pepper, oregano, and thyme in a small bowl.</li>
-                    <li> Sprinkle herb mixture and lemon juice evenly over the fish. Then drizzle melted margarine on
-                        top.</li>
-                    <li>Bake until fish flakes easily with a fork, about 20 to 25 minutes.</li>
-                </ol>
-
-            </div>
-        </div>
-
-        <div id="card">
-            <img src="rec/Rec12.jpg" alt="Card Image 12" width="200px">
-            <div class="card-content">
-                <h2> <b> <i> Egg Parathas </b> </i> </h2>
-                <h3>Benificial for Muscle-gain</h3>
-                <table>
-                    <tr>
-                        <th>Category</th>
-                        <th>Non-Veg</th>
-                    </tr>
-                    <tr>
-                        <th>Nutrient</th>
-                        <th>Amount</th>
-                    </tr>
-                    <tr>
-                        <td>Calories</td>
-                        <td>300kcal</td>
-                    </tr>
-                    <tr>
-                        <td>Protein</td>
-                        <td>25g</td>
-                    </tr>
-                    <tr>
-                        <td>Fat</td>
-                        <td>15g</td>
-                    </tr>
-                    <tr>
-                        <td>Carbohydrates</td>
-                        <td>10g</td>
-                    </tr>
-                    <tr>
-                        <td>Fiber</td>
-                        <td>3g</td>
-                    </tr>
-                    <tr>
-                        <td>Sugar</td>
-                        <td>2g</td>
-                    </tr>
-                    <tr>
-                        <td>Sodium</td>
-                        <td>500mg</td>
-                    </tr>
-                </table>
-                <h2>Ingredients:</h2>
-                <ul>
-                    <li>1 lb boneless, skinless chicken breasts, cooked and shredded</li>
-                    <li>1 cup cooked brown rice</li>
-                    <li>1 can (15 oz) black beans, drained and rinsed</li>
-                    <li>1 cup corn kernels (fresh or frozen)</li>
-                    <li>1 cup cherry tomatoes, halved</li>
-                    <li>1/2 cup red onion, finely chopped</li>
-                    <li>1/4 cup fresh cilantro, chopped</li>
-                    <li>1 avocado, sliced</li>
-                    <li>1 lime, cut into wedges</li>
-                    <li>Salt and pepper to taste</li>
-                    <li>1 cup shredded lettuce</li>
-                    <li>1/2 cup shredded cheddar cheese</li>
-                    <li>1/4 cup sour cream</li>
-                    <li>1/4 cup salsa</li>
-                    <li>1 tablespoon olive oil</li>
-                    <li>1 teaspoon ground cumin</li>
-                    <li>1 teaspoon chili powder</li>
-                    <li>1/2 teaspoon garlic powder</li>
-                </ul>
-
-                <h2>Instructions:</h2>
-                <ol>
-                    <li>In a large bowl, combine the shredded chicken, cooked brown rice, black beans, corn, cherry
-                        tomatoes, red onion, and cilantro.</li>
-                    <li>Drizzle olive oil over the mixture and add cumin, chili powder, garlic powder, salt, and pepper.
-                        Toss everything together until well combined.</li>
-                    <li>Assemble the burrito bowls by placing a portion of the chicken and rice mixture in each bowl.
-                    </li>
-                    <li>Top each bowl with shredded lettuce, cheddar cheese, avocado slices, sour cream, and salsa.</li>
-                    <li>Serve the Chipotle Chicken Burrito Bowls with lime wedges on the side for squeezing over the
-                        top.</li>
-                    <li>Enjoy your delicious homemade burrito bowls!</li>
-                </ol>
-            </div>
-        </div>
-
-        <div id="card">
-            <img src="rec/Rec13.jpg" alt="Card Image 13" width="200px">
-            <div class="card-content">
-                <h2> <b> <i> Air Fryer Eggplant Parm </b> </i> </h2>
-                <h3>Benificial for Weight-gain</h3>
-                <table>
-                    <tr>
-                        <th>Category</th>
-                        <th>Veg</th>
-                    </tr>
-                    <tr>
-                        <th>Nutrient</th>
-                        <th>Amount</th>
-                    </tr>
-                    <tr>
-                        <td>Calories</td>
-                        <td>300kcal</td>
-                    </tr>
-                    <tr>
-                        <td>Protein</td>
-                        <td>25g</td>
-                    </tr>
-                    <tr>
-                        <td>Fat</td>
-                        <td>15g</td>
-                    </tr>
-                    <tr>
-                        <td>Carbohydrates</td>
-                        <td>10g</td>
-                    </tr>
-                    <tr>
-                        <td>Fiber</td>
-                        <td>3g</td>
-                    </tr>
-                    <tr>
-                        <td>Sugar</td>
-                        <td>2g</td>
-                    </tr>
-                    <tr>
-                        <td>Sodium</td>
-                        <td>500mg</td>
-                    </tr>
-                </table>
-                <h2>Ingredients:</h2>
-                <ul>
-                    <li>1 large eggplant, sliced into 1/2-inch rounds</li>
-                    <li>1 cup breadcrumbs</li>
-                    <li>1/2 cup grated Parmesan cheese</li>
-                    <li>1 teaspoon dried oregano</li>
-                    <li>1 teaspoon garlic powder</li>
-                    <li>1/2 teaspoon salt</li>
-                    <li>1/4 teaspoon black pepper</li>
-                    <li>2 large eggs, beaten</li>
-                    <li>1 cup marinara sauce</li>
-                    <li>1 cup shredded mozzarella cheese</li>
-                    <li>Fresh basil leaves for garnish</li>
-                    <li>Olive oil spray</li>
-                </ul>
-
-                <h2>Instructions:</h2>
-                <ol>
-                    <li>Preheat the air fryer to 375°F (190°C).</li>
-                    <li>In a bowl, combine breadcrumbs, Parmesan cheese, oregano, garlic powder, salt, and black pepper.
-                    </li>
-                    <li>Dip each eggplant slice into the beaten eggs and then coat with the breadcrumb mixture, pressing
-                        gently to adhere.</li>
-                    <li>Place the coated eggplant slices in a single layer in the air fryer basket, ensuring they are
-                        not touching.</li>
-                    <li>Lightly spray the eggplant slices with olive oil.</li>
-                    <li>Air fry for 10-12 minutes, flipping halfway through, until the eggplant is golden and crispy.
-                    </li>
-                    <li>Remove the eggplant slices from the air fryer and set aside.</li>
-                    <li>Spread a thin layer of marinara sauce in the bottom of the air fryer basket.</li>
-                    <li>Arrange the air-fried eggplant slices on top of the sauce.</li>
-                    <li>Spoon more marinara sauce over each eggplant slice and sprinkle with shredded mozzarella cheese.
-                    </li>
-                    <li>Return the basket to the air fryer and cook for an additional 5-7 minutes, or until the cheese
-                        is melted and bubbly.</li>
-                    <li>Garnish with fresh basil leaves before serving.</li>
-                </ol>
-            </div>
-        </div>
-
-        <div id="card">
-            <img src="rec/Rec14.jpg" alt="Card Image 14" width="200px">
-            <div class="card-content">
-                <h2> <b> <i> Cauliflower Fried Rice </b> </i> </h2>
-                <h3>Benificial for Weight-gain</h3>
-                <table>
-                    <tr>
-                        <th>Category</th>
-                        <th>Veg</th>
-                    </tr>
-                    <tr>
-                        <th>Nutrient</th>
-                        <th>Amount</th>
-                    </tr>
-                    <tr>
-                        <td>Calories</td>
-                        <td>300kcal</td>
-                    </tr>
-                    <tr>
-                        <td>Protein</td>
-                        <td>25g</td>
-                    </tr>
-                    <tr>
-                        <td>Fat</td>
-                        <td>15g</td>
-                    </tr>
-                    <tr>
-                        <td>Carbohydrates</td>
-                        <td>10g</td>
-                    </tr>
-                    <tr>
-                        <td>Fiber</td>
-                        <td>3g</td>
-                    </tr>
-                    <tr>
-                        <td>Sugar</td>
-                        <td>2g</td>
-                    </tr>
-                    <tr>
-                        <td>Sodium</td>
-                        <td>500mg</td>
-                    </tr>
-                </table>
-                <h2>Ingredients:</h2>
-                <ul>
-                    <li>1 medium-sized cauliflower, grated</li>
-                    <li>2 tablespoons vegetable oil</li>
-                    <li>1 onion, finely chopped</li>
-                    <li>2 cloves garlic, minced</li>
-                    <li>1 carrot, diced</li>
-                    <li>1/2 cup peas</li>
-                    <li>2 eggs, beaten</li>
-                    <li>3 tablespoons soy sauce</li>
-                    <li>1 teaspoon sesame oil</li>
-                    <li>Salt and pepper to taste</li>
-                    <li>Green onions, chopped (for garnish)</li>
-                    <li>Sesame seeds (for garnish)</li>
-                </ul>
-
-                <h2>Instructions:</h2>
-                <ol>
-                    <li>Heat vegetable oil in a large skillet or wok over medium-high heat.</li>
-                    <li>Add chopped onions and minced garlic, sauté until fragrant.</li>
-                    <li>Add diced carrots and peas, stir-fry until vegetables are tender.</li>
-                    <li>Push the vegetables to one side of the skillet, pour beaten eggs into the other side. Scramble
-                        the eggs until cooked through.</li>
-                    <li>Combine the scrambled eggs with the vegetables.</li>
-                    <li>Add grated cauliflower to the skillet, stirring continuously.</li>
-                    <li>Pour soy sauce and sesame oil over the cauliflower mixture. Mix well.</li>
-                    <li>Cook for an additional 5-7 minutes or until the cauliflower is tender but not mushy.</li>
-                    <li>Season with salt and pepper to taste.</li>
-                    <li>Garnish with chopped green onions and sesame seeds.</li>
-                    <li>Serve hot and enjoy your delicious Cauliflower Fried Rice!</li>
-                </ol>
-
-            </div>
-        </div>
-
-        <div id="card">
-            <img src="rec/Rec15.jpg" alt="Card Image 15" width="200px">
-            <div class="card-content">
-                <h2> <b> <i> Air Fryer Fish Tacos With Avocado Salsa </b> </i> </h2>
-                <h3>Benificial for Weight-gain</h3>
-                <table>
-                    <tr>
-                        <th>Category</th>
-                        <th>Non-Veg</th>
-                    </tr>
-                    <tr>
-                        <th>Nutrient</th>
-                        <th>Amount</th>
-                    </tr>
-                    <tr>
-                        <td>Calories</td>
-                        <td>300kcal</td>
-                    </tr>
-                    <tr>
-                        <td>Protein</td>
-                        <td>25g</td>
-                    </tr>
-                    <tr>
-                        <td>Fat</td>
-                        <td>15g</td>
-                    </tr>
-                    <tr>
-                        <td>Carbohydrates</td>
-                        <td>10g</td>
-                    </tr>
-                    <tr>
-                        <td>Fiber</td>
-                        <td>3g</td>
-                    </tr>
-                    <tr>
-                        <td>Sugar</td>
-                        <td>2g</td>
-                    </tr>
-                    <tr>
-                        <td>Sodium</td>
-                        <td>500mg</td>
-                    </tr>
-                </table>
-                <h2>Ingredients</h2>
-                <ul>
-                    <li>1 pound white fish fillets (such as cod or tilapia)</li>
-                    <li>1 cup all-purpose flour</li>
-                    <li>1 teaspoon garlic powder</li>
-                    <li>1 teaspoon smoked paprika</li>
-                    <li>1/2 teaspoon cayenne pepper</li>
-                    <li>Salt and pepper to taste</li>
-                    <li>1 cup buttermilk</li>
-                    <li>1 cup breadcrumbs</li>
-                    <li>Avocado oil spray (or cooking spray of choice)</li>
-                    <li>8 small flour tortillas</li>
-                    <li>Shredded cabbage or lettuce for topping</li>
-                    <li>Fresh cilantro, chopped, for garnish</li>
-                </ul>
-                <h2>Instructions</h2>
-                <ol>
-                    <li>Preheat the air fryer to 400°F (200°C).</li>
-                    <li>In a shallow bowl, mix the flour, garlic powder, smoked paprika, cayenne pepper, salt, and
-                        pepper.</li>
-                    <li>Dip each fish fillet into the buttermilk, then coat with the breadcrumb mixture.</li>
-                    <li>Place the breaded fish fillets in the air fryer basket and spray with avocado oil or cooking
-                        spray.</li>
-                    <li>Air fry for 10-12 minutes or until the fish is golden brown and cooked through, flipping halfway
-                        through.</li>
-                    <li>While the fish is cooking, prepare the avocado salsa by combining diced avocados, cherry
-                        tomatoes, red onion, cilantro, lime juice, salt, and pepper in a bowl. Mix well.</li>
-                    <li>Warm the flour tortillas in the air fryer or on a skillet.</li>
-                    <li>Assemble the tacos by placing a portion of the cooked fish on each tortilla, topping with
-                        shredded cabbage or lettuce, and spooning the avocado salsa over the top.</li>
-                    <li>Garnish with chopped cilantro and serve immediately.</li>
-                </ol>
-            </div>
-        </div>
-
-        <div id="card">
-            <img src="rec/Rec16.jpg" alt="Card Image 16" width="200px">
-            <div class="card-content">
-                <h2> <b> <i> Coconut Chickpea & Sweet Potato Curry </b> </i> </h2>
-                <h3>Benificial for Weight-gain</h3>
-                <table>
-                    <tr>
-                        <th>Category</th>
-                        <th>Veg</th>
-                    </tr>
-                    <tr>
-                        <th>Nutrient</th>
-                        <th>Amount</th>
-                    </tr>
-                    <tr>
-                        <td>Calories</td>
-                        <td>300kcal</td>
-                    </tr>
-                    <tr>
-                        <td>Protein</td>
-                        <td>25g</td>
-                    </tr>
-                    <tr>
-                        <td>Fat</td>
-                        <td>15g</td>
-                    </tr>
-                    <tr>
-                        <td>Carbohydrates</td>
-                        <td>10g</td>
-                    </tr>
-                    <tr>
-                        <td>Fiber</td>
-                        <td>3g</td>
-                    </tr>
-                    <tr>
-                        <td>Sugar</td>
-                        <td>2g</td>
-                    </tr>
-                    <tr>
-                        <td>Sodium</td>
-                        <td>500mg</td>
-                    </tr>
-                </table>
-                <h2>Ingredients</h2>
-                <ul>
-                    <li>1 can (15 oz) chickpeas, drained and rinsed</li>
-                    <li>2 medium sweet potatoes, peeled and diced</li>
-                    <li>1 onion, finely chopped</li>
-                    <li>2 cloves garlic, minced</li>
-                    <li>1 can (14 oz) coconut milk</li>
-                    <li>1 can (14 oz) diced tomatoes</li>
-                    <li>1 cup vegetable broth</li>
-                    <li>2 tablespoons curry powder</li>
-                    <li>1 teaspoon ground turmeric</li>
-                    <li>1 teaspoon ground cumin</li>
-                    <li>1 tablespoon vegetable oil</li>
-                    <li>Salt and pepper to taste</li>
-                    <li>Fresh cilantro for garnish (optional)</li>
-                </ul>
-
-                <h2>Instructions</h2>
-                <ol>
-                    <li>Heat vegetable oil in a large pot over medium heat.</li>
-                    <li>Add chopped onions and minced garlic. Sauté until onions are translucent.</li>
-                    <li>Add curry powder, ground turmeric, and ground cumin. Stir well to coat the onions and garlic
-                        with the spices.</li>
-                    <li>Add diced sweet potatoes, chickpeas, coconut milk, diced tomatoes, and vegetable broth. Stir to
-                        combine.</li>
-                    <li>Season with salt and pepper to taste. Bring the curry to a simmer.</li>
-                    <li>Cover the pot and let it simmer for about 20-25 minutes or until sweet potatoes are tender.</li>
-                    <li>Optional: Garnish with fresh cilantro before serving.</li>
-                    <li>Serve the Coconut Chickpea & Sweet Potato Curry over rice or with your favorite bread.</li>
-                </ol>
-
-            </div>
-        </div>
-
-        <div id="card">
-            <img src="rec/Rec17.jpg" alt="Card Image 17" width="200px">
-            <div class="card-content">
-                <h2> <b> <i> Taco Salad </b> </i> </h2>
-                <h3>Benificial for Weight-gain</h3>
-                <table>
-                    <tr>
-                        <th>Category</th>
-                        <th>Veg</th>
-                    </tr>
-                    <tr>
-                        <th>Nutrient</th>
-                        <th>Amount</th>
-                    </tr>
-                    <tr>
-                        <td>Calories</td>
-                        <td>300kcal</td>
-                    </tr>
-                    <tr>
-                        <td>Protein</td>
-                        <td>25g</td>
-                    </tr>
-                    <tr>
-                        <td>Fat</td>
-                        <td>15g</td>
-                    </tr>
-                    <tr>
-                        <td>Carbohydrates</td>
-                        <td>10g</td>
-                    </tr>
-                    <tr>
-                        <td>Fiber</td>
-                        <td>3g</td>
-                    </tr>
-                    <tr>
-                        <td>Sugar</td>
-                        <td>2g</td>
-                    </tr>
-                    <tr>
-                        <td>Sodium</td>
-                        <td>500mg</td>
-                    </tr>
-                </table>
-                <h2>Ingredients</h2>
-                <ul>
-                    <li>1 lb ground beef</li>
-                    <li>1 packet taco seasoning</li>
-                    <li>1 can (15 oz) black beans, drained and rinsed</li>
-                    <li>1 cup cherry tomatoes, halved</li>
-                    <li>1 cup shredded lettuce</li>
-                    <li>1 cup shredded cheddar cheese</li>
-                    <li>1/2 cup diced red onion</li>
-                    <li>1/2 cup sliced black olives</li>
-                    <li>1/4 cup chopped fresh cilantro</li>
-                    <li>1 avocado, diced</li>
-                    <li>1/2 cup sour cream</li>
-                    <li>1/4 cup salsa</li>
-                    <li>Tortilla chips for serving</li>
-                    <li>Salt and pepper to taste</li>
-                </ul>
-
-                <h2>Instructions</h2>
-                <ol>
-                    <li>In a skillet over medium heat, brown the ground beef. Drain excess fat.</li>
-                    <li>Add the taco seasoning to the cooked beef according to the packet instructions.</li>
-                    <li>In a large bowl, combine the cooked beef, black beans, cherry tomatoes, lettuce, cheddar cheese,
-                        red onion, black olives, and cilantro.</li>
-                    <li>Toss the salad ingredients together until well mixed.</li>
-                    <li>In a small bowl, mix together sour cream and salsa to create the dressing.</li>
-                    <li>Drizzle the dressing over the salad and toss again to coat everything evenly.</li>
-                    <li>Gently fold in the diced avocado.</li>
-                    <li>Season the salad with salt and pepper to taste.</li>
-                    <li>Serve the taco salad in individual bowls, and top with crushed tortilla chips.</li>
-                    <li>Enjoy your delicious Taco Salad!</li>
-                </ol>
-
-            </div>
-        </div>
-
-        <div id="card">
-            <img src="rec/Rec18.jpg" alt="Card Image 18" width="200px">
-            <div class="card-content">
-                <h2> <b> <i> Cabbage Parmesan </b> </i> </h2>
-                <h3>Benificial for Weight-gain</h3>
-                <table>
-                    <tr>
-                        <th>Category</th>
-                        <th>Veg</th>
-                    </tr>
-                    <tr>
-                        <th>Nutrient</th>
-                        <th>Amount</th>
-                    </tr>
-                    <tr>
-                        <td>Calories</td>
-                        <td>300kcal</td>
-                    </tr>
-                    <tr>
-                        <td>Protein</td>
-                        <td>25g</td>
-                    </tr>
-                    <tr>
-                        <td>Fat</td>
-                        <td>15g</td>
-                    </tr>
-                    <tr>
-                        <td>Carbohydrates</td>
-                        <td>10g</td>
-                    </tr>
-                    <tr>
-                        <td>Fiber</td>
-                        <td>3g</td>
-                    </tr>
-                    <tr>
-                        <td>Sugar</td>
-                        <td>2g</td>
-                    </tr>
-                    <tr>
-                        <td>Sodium</td>
-                        <td>500mg</td>
-                    </tr>
-                </table>
-                <h2>Ingredients:</h2>
-                <ul>
-                    <li>1 medium-sized cabbage, shredded</li>
-                    <li>1 cup grated Parmesan cheese</li>
-                    <li>1 cup breadcrumbs</li>
-                    <li>2 eggs, beaten</li>
-                    <li>1 cup marinara sauce</li>
-                    <li>1 cup shredded mozzarella cheese</li>
-                    <li>2 cloves garlic, minced</li>
-                    <li>1 teaspoon dried oregano</li>
-                    <li>1 teaspoon dried basil</li>
-                    <li>Salt and pepper to taste</li>
-                    <li>Olive oil for drizzling</li>
-                </ul>
-
-                <h2>Instructions:</h2>
-                <ol>
-                    <li>Preheat the oven to 375°F (190°C).</li>
-                    <li>In a large mixing bowl, combine the shredded cabbage, minced garlic, oregano, basil, salt, and
-                        pepper. Toss well to coat the cabbage evenly with the seasonings.</li>
-                    <li>Dip each cabbage leaf into the beaten eggs, then coat with breadcrumbs and Parmesan cheese.</li>
-                    <li>Place the coated cabbage leaves in a baking dish, layering them evenly.</li>
-                    <li>Drizzle olive oil over the top and bake in the preheated oven for 25-30 minutes or until the
-                        cabbage is golden and crispy.</li>
-                    <li>Remove from the oven and pour marinara sauce over the cabbage leaves, followed by shredded
-                        mozzarella cheese.</li>
-                    <li>Return the baking dish to the oven and bake for an additional 15 minutes, or until the cheese is
-                        melted and bubbly.</li>
-                    <li>Remove from the oven, let it cool slightly, and serve the Cabbage Parmesan hot.</li>
-                </ol>
-            </div>
-        </div>
-
-        <div id="card">
-            <img src="rec/Rec3.jpg" alt="Card Image 3" width="200px">
-            <div class="card-content">
-                <h2> <b> <i> Egg Bhurji </b> </i> </h2>
-                <h3>Benificial for Weight-loss</h3>
-                <table>
-                    <tr>
-                        <th>Category</th>
-                        <th>Non-Veg</th>
-                    </tr>
-                    <tr>
-                        <th>Nutrient</th>
-                        <th>Amount</th>
-                    </tr>
-                    <tr>
-                        <td>Calories</td>
-                        <td>273kcal</td>
-                    </tr>
-                    <tr>
-                        <td>Protein</td>
-                        <td>25g</td>
-                    </tr>
-                    <tr>
-                        <td>Fat</td>
-                        <td>11g</td>
-                    </tr>
-                    <tr>
-                        <td>Carbohydrates</td>
-                        <td>23g</td>
-                    </tr>
-                    <tr>
-                        <td>Fiber</td>
-                        <td>6g</td>
-                    </tr>
-                    <tr>
-                        <td>Calcium</td>
-                        <td>87mg</td>
-                    </tr>
-                    <tr>
-                        <td>Iron</td>
-                        <td>3mg</td>
-                    </tr>
-                </table>
-                <h2>Ingredients:</h2>
-                <ul>
-                    <li>1 lb boneless, skinless chicken breasts, cut into bite-sized pieces</li>
-                    <li>2 tablespoons vegetable oil</li>
-                    <li>1 red bell pepper, thinly sliced</li>
-                    <li>1 yellow bell pepper, thinly sliced</li>
-                    <li>1 small onion, thinly sliced</li>
-                    <li>3 cloves garlic, minced</li>
-                    <li>1 can (14 oz) coconut milk</li>
-                    <li>2 tablespoons soy sauce</li>
-                    <li>1 tablespoon fish sauce</li>
-                    <li>1 tablespoon red curry paste</li>
-                    <li>1 teaspoon brown sugar</li>
-                    <li>1 cup fresh basil leaves, torn</li>
-                    <li>Salt and pepper, to taste</li>
-                    <li>Cooked rice, for serving</li>
-                    <li>Lime wedges, for garnish</li>
-                    <li>Chopped peanuts, for garnish</li>
-                    <li>Fresh cilantro, for garnish</li>
-                </ul>
-
-                <h2>Instructions:</h2>
-                <ol>
-                    <li>Season the chicken pieces with salt and pepper.</li>
-                    <li>Heat vegetable oil in a large skillet over medium-high heat.</li>
-                    <li>Add the chicken pieces and cook until browned on all sides. Remove from the skillet and set
-                        aside.</li>
-                    <li>In the same skillet, add more oil if needed and sauté the bell peppers, onion, and garlic until
-                        softened.</li>
-                    <li>Stir in the coconut milk, soy sauce, fish sauce, red curry paste, and brown sugar. Bring to a
-                        simmer.</li>
-                    <li>Return the cooked chicken to the skillet and simmer until the chicken is cooked through and the
-                        sauce thickens.</li>
-                    <li>Stir in the torn basil leaves just before serving.</li>
-                    <li>Serve the creamy Thai basil chicken over cooked rice.</li>
-                    <li>Garnish with lime wedges, chopped peanuts, and fresh cilantro.</li>
-                </ol>
-
-            </div>
-        </div>
-
-
-
-        <div id="card">
-
-            <img src="rec/Rec20.jpg" alt="Card Image 20" width="200px">
-            <div class="card-content">
-                <h2> <b> <i> Butternut Squash Curry </b> </i> </h2>
-                <h3>Benificial for Weight-gain</h3>
-                <table>
-                    <tr>
-                        <th>Category</th>
-                        <th>Veg</th>
-                    </tr>
-                    <tr>
-                        <th>Nutrient</th>
-                        <th>Amount</th>
-                    </tr>
-                    <tr>
-                        <td>Calories</td>
-                        <td>300kcal</td>
-                    </tr>
-                    <tr>
-                        <td>Protein</td>
-                        <td>25g</td>
-                    </tr>
-                    <tr>
-                        <td>Fat</td>
-                        <td>15g</td>
-                    </tr>
-                    <tr>
-                        <td>Carbohydrates</td>
-                        <td>10g</td>
-                    </tr>
-                    <tr>
-                        <td>Fiber</td>
-                        <td>3g</td>
-                    </tr>
-                    <tr>
-                        <td>Sugar</td>
-                        <td>2g</td>
-                    </tr>
-                    <tr>
-                        <td>Sodium</td>
-                        <td>500mg</td>
-                    </tr>
-                </table>
-                <h2>Ingredients:</h2>
-                <ul>
-                    <li>1 medium-sized butternut squash, peeled, seeded, and diced</li>
-                    <li>1 onion, finely chopped</li>
-                    <li>2 cloves garlic, minced</li>
-                    <li>1-inch ginger, grated</li>
-                    <li>1 can (400 ml) coconut milk</li>
-                    <li>2 tablespoons curry powder</li>
-                    <li>1 teaspoon turmeric powder</li>
-                    <li>1 teaspoon cumin powder</li>
-                    <li>1 teaspoon coriander powder</li>
-                    <li>1/2 teaspoon red chili flakes (adjust to taste)</li>
-                    <li>Salt and pepper to taste</li>
-                    <li>2 tablespoons vegetable oil</li>
-                    <li>Fresh cilantro leaves for garnish</li>
-                    <li>Cooked rice or naan for serving</li>
-                </ul>
-
-                <h2>Instructions:</h2>
-                <ol>
-                    <li>Heat vegetable oil in a large pan over medium heat.</li>
-                    <li>Add chopped onion and cook until it becomes translucent.</li>
-                    <li>Add minced garlic and grated ginger, sauté for an additional minute.</li>
-                    <li>Add curry powder, turmeric powder, cumin powder, coriander powder, and red chili flakes. Stir
-                        well to combine.</li>
-                    <li>Add diced butternut squash to the pan and mix until the squash is coated with the spice mixture.
-                    </li>
-                    <li>Pour in the coconut milk and bring the mixture to a simmer. Cover the pan and let it cook until
-                        the butternut squash is tender (usually about 15-20 minutes).</li>
-                    <li>Season with salt and pepper to taste. Adjust the spice levels if needed.</li>
-                    <li>Serve the butternut squash curry over cooked rice or with naan.</li>
-                    <li>Garnish with fresh cilantro leaves before serving.</li>
-                </ol>
-            </div>
-        </div>
     </div>
     <br><br>
 </body>
 
 <?php
 include 'footer.php';
-
 ?>
